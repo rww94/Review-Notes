@@ -4,6 +4,6 @@
 ## 3 [计算机网络](https://github.com/rww94/Review-Notes/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md)
 ## 4 [LINUX](https://github.com/rww94/Review-Notes/blob/master/LINUX.md)
 ## 5 [JVM](https://github.com/rww94/Review-Notes/blob/master/JVM.md)
-## 6 [SSM框架](https://github.com/rww94/Review-Notes/blob/master/Spring.md)
+## 6 [SSM框架](https://github.com/rww94/Review-Notes/blob/master/SSM%E6%A1%86%E6%9E%B6.md)
 ## 7 [手撕代码](https://github.com/rww94/Review-Notes/blob/master/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81.md)
 参考[CyC2018后台开发复习要点](https://github.com/CyC2018/Backend-Interview-Guide/blob/master/doc/一文帮你理清面试知识点.md). 
