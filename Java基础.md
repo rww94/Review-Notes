@@ -17,7 +17,7 @@
 * HashMap：基于hash表（数组+链表）实现的，元素没有顺序，不具有线程安全性，允许key值为null，初始化数组大小为16；
 * LinkedHashMap：基于Hash表和双向链表实现的，元素按照插入顺序排序，不具有线程安全性；
 * HashTable：基于Hash表实现，元素没有顺序，线程安全的；
-* TreMap：基于红黑树，元素按照自然排序，线程安全
+* TreMap：基于红黑树，元素按照自然排序，线程安全。
 # 6 强制类型转换
 ## 6.1 向上转换
 对于基础类型可以自动转换，例如int转long，因为long的范围更大
@@ -35,3 +35,33 @@ A a = new B();
 long a = 10;
 int b = (int)a;
 ```
+
+
+public String longestPalindrome(String s) {
+    if (s == null || s.length() < 1) return "";
+    int start = 0, end = 0;
+    for (int i = 0; i < s.length(); i++) {
+        int len1 = expandAroundCenter(s, i, i);
+        int len2 = expandAroundCenter(s, i, i + 1);
+        int len = Math.max(len1, len2);
+        if (len > end - start) {
+            start = i - (len - 1) / 2;
+            end = i + len / 2;
+        }
+    }
+    return s.substring(start, end + 1);
+}
+
+private int expandAroundCenter(String s, int left, int right) {
+    int L = left, R = right;
+    while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+        L--;
+        R++;
+    }
+    return R - L - 1;
+}
+
+作者：LeetCode
+链接：https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zui-chang-hui-wen-zi-chuan-by-leetcode/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
