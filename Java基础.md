@@ -1,4 +1,17 @@
-# 1 static、final关键字
+<!-- TOC -->
+
+- [2 接口和抽象类](#2-接口和抽象类)
+- [3 equlas和hashcode](#3-equlas和hashcode)
+- [4 hashMap](#4-hashmap)
+- [5 java 容器类](#5-java-容器类)
+    - [5.1 Collection](#51-collection)
+    - [5.2 Map](#52-map)
+- [6 强制类型转换](#6-强制类型转换)
+    - [6.1 向上转换](#61-向上转换)
+    - [6.2 向下转换](#62-向下转换)
+- [7 java函数只有值传递没有引用传递](#7-java函数只有值传递没有引用传递)
+
+<!-- /TOC -->
 
 # 2 接口和抽象类
 # 3 equlas和hashcode
@@ -37,32 +50,10 @@ long a = 10;
 int b = (int)a;
 ```
 
+# 7 java函数只有值传递没有引用传递
+&emsp;&emsp;值传递：对所传递参数进行一次副本拷贝，对参数的修改只是对副本的修改，函数调用结束后，副本丢弃，原来的变量不变；
+&emsp;&emsp;引用传递：参数被传递到函数时，不复制副本，而是直接将参数自身传入到函数中，函数内对参数的任何改变都将反应到原来的变量上。
+* 对于基本类型，传递的是值，这个值是复制的一份，所以不会改变原值；
+* 引用类型，传递的是地址，如果地址变了，那么原来的值肯定不变；（例如String，在函数中重新复制，引用地址变了，原来的值不变）
+* 引用类型，传递的是地址，如果地址没变而改变了地址对应的对象的属性，那么会改变原来的值。
 
-public String longestPalindrome(String s) {
-    if (s == null || s.length() < 1) return "";
-    int start = 0, end = 0;
-    for (int i = 0; i < s.length(); i++) {
-        int len1 = expandAroundCenter(s, i, i);
-        int len2 = expandAroundCenter(s, i, i + 1);
-        int len = Math.max(len1, len2);
-        if (len > end - start) {
-            start = i - (len - 1) / 2;
-            end = i + len / 2;
-        }
-    }
-    return s.substring(start, end + 1);
-}
-
-private int expandAroundCenter(String s, int left, int right) {
-    int L = left, R = right;
-    while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
-        L--;
-        R++;
-    }
-    return R - L - 1;
-}
-
-作者：LeetCode
-链接：https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zui-chang-hui-wen-zi-chuan-by-leetcode/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
