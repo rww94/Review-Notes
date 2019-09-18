@@ -1,5 +1,6 @@
 <!-- TOC -->
 
+- [1 final和staic关键字](#1-final和staic关键字)
 - [2 接口和抽象类](#2-接口和抽象类)
 - [3 equlas和hashcode](#3-equlas和hashcode)
 - [4 hashMap](#4-hashmap)
@@ -10,9 +11,11 @@
     - [6.1 向上转换](#61-向上转换)
     - [6.2 向下转换](#62-向下转换)
 - [7 java函数只有值传递没有引用传递](#7-java函数只有值传递没有引用传递)
+- [8 String,StringBuffer](#8-stringstringbuffer)
+- [9 Java创建对象的几种方式](#9-java创建对象的几种方式)
 
 <!-- /TOC -->
-
+# 1 final和staic关键字
 # 2 接口和抽象类
 # 3 equlas和hashcode
 # 4 hashMap
@@ -23,6 +26,7 @@
 * ArrayList：基于数组实现的，不具有线程安全性，查询快，增删慢，效率高；
 * Vector：基于数组实现，具有线程安全性，查询快，增删慢，效率低；
 <br>
+
 * HashSet：基于Hash表（数组+链表）实现的，元素没有排序顺序（顺序是不确定的），add()，remove()以及contains()等方法都是复杂度为O(1)的方法，；
 * TreeSet：基于树结构（红黑树）实现的，元素是按顺序排列的(自然顺序)，add()，remove()以及contains()等方法的复杂度为O(log(n));
 * LinkedHashSet：基于Hash表（数组+链表）实现的，介于HashSet和TreeSet之间，同时维护一个双链表来记录插入顺序，顺序是插入顺序；
@@ -56,4 +60,32 @@ int b = (int)a;
 * 对于基本类型，传递的是值，这个值是复制的一份，所以不会改变原值；
 * 引用类型，传递的是地址，如果地址变了，那么原来的值肯定不变；（例如String，在函数中重新复制，引用地址变了，原来的值不变）
 * 引用类型，传递的是地址，如果地址没变而改变了地址对应的对象的属性，那么会改变原来的值。
+# 8 String,StringBuffer
 
+# 9 Java创建对象的几种方式
+* 用new关键字；
+* 调用对象的clone方法；
+* 利用反射，调用class类或者Constructor类的newInstance()方法；
+* 用反序列化，调用ObjectInputStream类的readObject()方法；
+```java
+public class TestClass implements Cloneable{
+    @Override
+    protected TestClass clone() throws CloneNotSupportedException {
+        return (TestClass)super.clone();
+    }
+}
+public static void main(String[] agrs){
+    //方式1
+    TestClass test = new TestClass();
+    //方式2
+    TestClass test1 = (TestClass)Class.forName("包名.TestClass").newInstance();
+    //方式3
+    try{
+        TestClass test2 = (TestClass)test1.clone();  //要使用clone方法，实现Cloneable接口，重写clone方法，加异常处理
+    }catch(CloneNotSupportedException e){
+        e.printStackTrace();
+    }
+}
+
+
+```
