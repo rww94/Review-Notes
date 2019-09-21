@@ -1,6 +1,8 @@
 <!-- TOC -->
 
-- [1 final和staic关键字](#1-final和staic关键字)
+- [1 static和final关键字](#1-static和final关键字)
+    - [1.1 static](#11-static)
+    - [1.2 final](#12-final)
 - [2 接口和抽象类](#2-接口和抽象类)
 - [3 equlas和hashcode](#3-equlas和hashcode)
 - [4 hashMap](#4-hashmap)
@@ -11,11 +13,29 @@
     - [6.1 向上转换](#61-向上转换)
     - [6.2 向下转换](#62-向下转换)
 - [7 java函数只有值传递没有引用传递](#7-java函数只有值传递没有引用传递)
-- [8 String,StringBuffer](#8-stringstringbuffer)
+- [8 String,StringBuffer,StringBuilder](#8-stringstringbufferstringbuilder)
 - [9 Java创建对象的几种方式](#9-java创建对象的几种方式)
+- [10 final、finally、finalize的区别](#10-finalfinallyfinalize的区别)
+- [11 转发和重定向的区别](#11-转发和重定向的区别)
+- [12 wait、sleep和notify的区别](#12-waitsleep和notify的区别)
 
 <!-- /TOC -->
-# 1 final和staic关键字
+# 1 static和final关键字
+## 1.1 static
+static的意思是“静态的”，一般修饰属性和方法。
+* 1、static作用于某个字段时，一个static字段对于每个类来说都只有一份存储空间，而非static字段是每个对象都有一份存储空间；
+* 2、static作用于方法的用法是不用创建任何对象就能直接通过类名调用static方法；
+* 3、static不能作用于局部变量
+* 4、Java中禁止全局方法，所有引入static方法通过类本身调用；
+* 5、static不能修饰普通类，但可以作用于内部类。
+## 1.2 final
+final意味着“不可改变”，一般应用于数据、方法和类。
+* final数据：当数据是基本类型时，意味着这是一个永不改变的编译时常量，一个在运行时初始化的值，不希望他改变。
+当数据是引用类型时，用static和final修饰表示这是一块不能改变的内存空间。
+* final参数：当我们把方法传入的形参定义为final的时候，代表我们不想在方法内部修改此参数的引用；
+事实是当我们使用不带有final的关键字时，函数内部的引用改变也不会对外界的实参产生影响，所以我们认为这里是编译器的阻拦，起到警示作用。
+* final方法：我们使用final方法阻止子类对改类方法的修改或覆盖；
+类中所有private方法都隐式的制定为final，因为private只在本类显示，即使是子类也不能操作该方法，
 # 2 接口和抽象类
 # 3 equlas和hashcode
 # 4 hashMap
@@ -60,7 +80,7 @@ int b = (int)a;
 * 对于基本类型，传递的是值，这个值是复制的一份，所以不会改变原值；
 * 引用类型，传递的是地址，如果地址变了，那么原来的值肯定不变；（例如String，在函数中重新复制，引用地址变了，原来的值不变）
 * 引用类型，传递的是地址，如果地址没变而改变了地址对应的对象的属性，那么会改变原来的值。
-# 8 String,StringBuffer
+# 8 String,StringBuffer,StringBuilder
 
 # 9 Java创建对象的几种方式
 * 用new关键字；
@@ -86,6 +106,21 @@ public static void main(String[] agrs){
         e.printStackTrace();
     }
 }
-
-
 ```
+# 10 final、finally、finalize的区别
+* final
+修饰类，表明类不可继承
+修饰方法，表明方法不能被重写
+修饰变量，表明该变量不可修改，且只能赋值一次
+* finally
+finally是保证代码一定要被执行的一种机制
+比如try-finally或try-catch-finally，用来关闭JDBC连接或者处理异常
+* finalize
+finalize是Object的一个方法，他的目的是保证对象在被垃圾回收前完成特定资源的回收
+
+# 11 转发和重定向的区别
+* 转发是一次请求，重定向是多次请求。
+* 如果数据存在request对象中，由于转发是一次请求所以数据可以传递；而重定向是多次请求，所以是不同的请求，存储的request对象中的数据无法传递；如果数据存在session中，代表服务端和客户端的一次会话，包含多次请求和响应过程，所以不管是重定向还是转发都能传递数据。
+* 如果想跳转到百度，需要使用重定向，因为转发的范围是在服务器内部。
+
+# 12 wait、sleep和notify的区别
